@@ -1,0 +1,16 @@
+import requests
+from bs4 import BeautifulSoup
+
+#Collect information from the manga list page
+page = requests.get('http://myheroacademiamanga.com/')
+soup = BeautifulSoup(page.text, 'html.parser')
+
+# Pull all text from BodyText div
+manga_list_names = soup.find(class_='myher-content')
+# Pulls all items contained within Chapters_List in the manga site
+chapter_list_and_links = soup.find("div", {"id": "Chapters_List"})
+print(chapter_list_and_links)
+#Pulls Only the URL's within the chapters list
+for url in soup.find_all('a'):
+    url_list=(print(url.get('href')))
+
